@@ -12,6 +12,23 @@ consumes:
   - application/json
 produces:
   - application/json
+
+securityDefinitions:
+  petstore_application:
+    type: oauth2
+    authorizationUrl: http://swagger.io/api/oauth/dialog
+    flow: application
+    scopes:
+      write:pets: modify pets in your account
+      read:pets: read your pets
+  petstore_password:
+    type: oauth2
+    authorizationUrl: http://swagger.io/api/oauth/dialog
+    flow: password
+    scopes:
+      write:pets: modify pets in your account
+      read:pets: read your pets
+
 paths:
   /pets:
     get:
@@ -39,6 +56,11 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
+      security:
+        petstore_application:
+        - read:pets
+        petstore_password:
+        - read:pets
     post:
       summary: Create a pet
       operationId: createPets
@@ -51,6 +73,9 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
+      security:
+        petstore_password:
+        - write:pets
   /pets/{petId}:
     get:
       summary: Info for a specific pet

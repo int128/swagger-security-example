@@ -17,7 +17,7 @@ generateSwaggerCode {
     language = 'spring'
     inputFile = file('petstore.yaml')
     configFile = file('config.json')
-    components = ['models', 'apis']
+    //components = ['models', 'apis']
 }
 
 compileJava.dependsOn generateSwaggerCode
