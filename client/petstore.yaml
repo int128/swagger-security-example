@@ -28,6 +28,10 @@ securityDefinitions:
     scopes:
       write:pets: modify pets in your account
       read:pets: read your pets
+  petstore_apiKey:
+    type: apiKey
+    name: X-APIKEY
+    in: header
 
 paths:
   /pets:
@@ -61,6 +65,7 @@ paths:
         - read:pets
         petstore_password:
         - read:pets
+        petstore_apiKey: []
     post:
       summary: Create a pet
       operationId: createPets
